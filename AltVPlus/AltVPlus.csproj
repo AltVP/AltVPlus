@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<AllOutputFiles Include="$(OutputPath)\publish\*.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="AltV.Net" Version="9.0.14-dev61" />
+	  <PackageReference Include="AltV.Net.Async" Version="9.0.14-dev61" />
+	  <PackageReference Include="AltV.Net.Client" Version="9.0.14-dev61" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<Target Name="CopyFiles" AfterTargets="publish">
+		<PropertyGroup>
+			<CopiedFiles>$(OutputPath)\publish\*.*</CopiedFiles>
+
+			<TargetLocation Condition=" '$(Configuration)' == 'Release' ">../../alt-dev/</TargetLocation>
+		</PropertyGroup>
+		<Copy Condition=" '$(TargetLocation)' != '' " SourceFiles="@(AllOutputFiles)" DestinationFolder="$(TargetLocation)" SkipUnchangedFiles="false" />
+	</Target>
+	
+</Project>

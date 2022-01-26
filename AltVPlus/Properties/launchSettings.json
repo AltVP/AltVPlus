@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "AltDev": {
+      "commandName": "Project",
+      "commandLineArgs": "altv-server.exe",
+      "workingDirectory": "D:\\GtaDev\\AltVServer"
+    }
+  }
+}
